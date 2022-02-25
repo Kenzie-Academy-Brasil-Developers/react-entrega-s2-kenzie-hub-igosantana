@@ -3,29 +3,17 @@ import { GlobalStyle } from './styles/global'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Modal from './components/Modal'
-import { useState, useEffect } from 'react'
-import api from './services/api'
+import { useState } from 'react'
 
 function App() {
-  const userStorage = JSON.parse(localStorage.getItem('@KenzieHub:user'))
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [userTec, setUserTec] = useState([])
-
-  const handleTechs = () => {
-    api
-      .get(`/users/${userStorage.id}`)
-      .then((data) => setUserTec(data.data.techs))
-  }
-  useEffect(() => {
-    handleTechs()
-  }, [])
 
   return (
     <>
       {modalIsOpen && (
         <Modal
           setModalIsOpen={setModalIsOpen}
-          handleTechs={handleTechs}
           setUserTec={setUserTec}
           userTec={userTec}
         />
@@ -46,6 +34,7 @@ function App() {
         modalIsOpen={modalIsOpen}
         setModalIsOpen={setModalIsOpen}
         userTec={userTec}
+        setUserTec={setUserTec}
       />
     </>
   )

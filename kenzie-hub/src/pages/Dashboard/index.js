@@ -10,8 +10,17 @@ import Card from '../../components/Card'
 import Logo from '../../assets/logo.svg'
 import { HiPlus } from 'react-icons/hi'
 import { useHistory, Redirect } from 'react-router-dom'
+import api from '../../services/api'
+import { useEffect } from 'react'
 
-const Dashboard = ({ modalIsOpen, setModalIsOpen, userTec, setAuth, auth }) => {
+const Dashboard = ({
+  modalIsOpen,
+  setModalIsOpen,
+  userTec,
+  setAuth,
+  auth,
+  setUserTec,
+}) => {
   const userStorage = JSON.parse(localStorage.getItem('@KenzieHub:user'))
 
   const history = useHistory()
@@ -20,14 +29,23 @@ const Dashboard = ({ modalIsOpen, setModalIsOpen, userTec, setAuth, auth }) => {
     setModalIsOpen(true)
   }
 
+  const handleTechs = async () => {
+    const response = await api.get(`/users/${userStorage.id}`)
+    setUserTec(response.data.techs)
+  }
+
+  useEffect(() => {
+    handleTechs()
+  }, [userTec])
+
   const handleLogout = () => {
     setAuth(false)
     localStorage.clear()
-    history.push('/login')
+    history.push('/')
   }
 
   if (!auth) {
-    return <Redirect to='/login' />
+    return <Redirect to='/' />
   }
 
   return (

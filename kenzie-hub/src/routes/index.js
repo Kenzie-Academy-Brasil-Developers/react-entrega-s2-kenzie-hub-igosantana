@@ -1,11 +1,10 @@
-import Home from '../pages/Home'
 import { Switch, Route } from 'react-router-dom'
 import Signup from '../pages/Signup'
 import Login from '../pages/Login'
 import Dashboard from '../pages/Dashboard'
 import { useState, useEffect } from 'react'
 
-const Routes = ({ modalIsOpen, setModalIsOpen, userTec }) => {
+const Routes = ({ modalIsOpen, setModalIsOpen, userTec, setUserTec }) => {
   const [auth, setAuth] = useState(false)
 
   useEffect(() => {
@@ -18,13 +17,10 @@ const Routes = ({ modalIsOpen, setModalIsOpen, userTec }) => {
 
   return (
     <Switch>
-      <Route exact path='/'>
-        <Home />
-      </Route>
       <Route exact path='/signup'>
         <Signup auth={auth} setAuth={setAuth} />
       </Route>
-      <Route exact path='/login'>
+      <Route exact path='/'>
         <Login auth={auth} setAuth={setAuth} />
       </Route>
       <Route exact path='/dashboard'>
@@ -34,6 +30,7 @@ const Routes = ({ modalIsOpen, setModalIsOpen, userTec }) => {
           modalIsOpen={modalIsOpen}
           setModalIsOpen={setModalIsOpen}
           userTec={userTec}
+          setUserTec={setUserTec}
         />
       </Route>
     </Switch>

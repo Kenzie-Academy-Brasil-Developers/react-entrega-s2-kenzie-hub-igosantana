@@ -48,12 +48,12 @@ const Signup = ({ auth }) => {
     delete data.confirmPassword
     data.bio = 'teste'
     data.contact = 'teste'
-    const response = await api.post('/users', data).catch((err) => {
+    api.post('/users', data).catch((err) => {
       toast.error('Falha na autenticação, verifique suas credenciais')
     })
 
     toast.success('Cadastro feito com sucesso')
-    history.push('/login')
+    history.push('/')
   }
   return (
     <Container>
@@ -62,7 +62,7 @@ const Signup = ({ auth }) => {
           <div>
             <img src={logo} alt='logo-kenzie' />
           </div>
-          <Link to='/login'>
+          <Link to='/'>
             <button>Voltar</button>
           </Link>
         </Header>
