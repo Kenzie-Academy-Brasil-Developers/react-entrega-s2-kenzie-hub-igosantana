@@ -5,7 +5,7 @@ import Login from '../pages/Login'
 import Dashboard from '../pages/Dashboard'
 import { useState, useEffect } from 'react'
 
-const Routes = () => {
+const Routes = ({ modalIsOpen, setModalIsOpen, userTec }) => {
   const [auth, setAuth] = useState(false)
 
   useEffect(() => {
@@ -28,7 +28,13 @@ const Routes = () => {
         <Login auth={auth} setAuth={setAuth} />
       </Route>
       <Route exact path='/dashboard'>
-        <Dashboard auth={auth} setAuth={setAuth} />
+        <Dashboard
+          auth={auth}
+          setAuth={setAuth}
+          modalIsOpen={modalIsOpen}
+          setModalIsOpen={setModalIsOpen}
+          userTec={userTec}
+        />
       </Route>
     </Switch>
   )

@@ -43,8 +43,10 @@ const Login = ({ auth, setAuth }) => {
       toast.error('Verifique suas credenciais')
     })
 
-    const { access } = response.data
-    localStorage.setItem('@KenzieHub:token', access)
+    const { token, user } = response.data
+    localStorage.setItem('@KenzieHub:token', JSON.stringify(token))
+    localStorage.setItem('@KenzieHub:user', JSON.stringify(user))
+
     toast.success('Login feito com sucesso')
     setAuth(true)
     history.push('/dashboard')
